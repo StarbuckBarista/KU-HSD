@@ -18,6 +18,6 @@ On the day of the competition, competitors were given a choice of features to im
 
 <br />
 
-<a href="https://github.com/StarbuckBarista/KU-HSD/Carlos Salazar - KU HSD.pdf">
+<a href="https://github.com/StarbuckBarista/KU-HSD/blob/963fc364b095fc4ae648f6d015c9e490c1018246/Carlos Salazar - KU HSD.jpg">
     <img src="./Carlos Salazar - KU HSD.jpg" alt="1st Place Certificate" style="width: 425px; height: 300px;">
 </a>
