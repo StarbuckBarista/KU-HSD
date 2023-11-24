@@ -1,0 +1,32 @@
+{
+    "users": [
+        {
+            "userID": "Carlos",
+            "password": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
+            "emailUpdates": true,
+            "email": "carlitos.salazar.kc@gmail.com",
+            "emailPassword": "fyfq xzoc bxpx vhmi"
+        },
+        {
+            "userID": "James",
+            "password": "d2895a9cc5e0a950f8059ff732f93d87730bb9dc94bcb36930ebfc3bd3102bdd",
+            "emailUpdates": false,
+            "email": "",
+            "emailPassword": ""
+        },
+        {
+            "userID": "Sarah",
+            "password": "1eb5bfd321aa0605f4ea31af9df1348e0ff9d8e9b51920c1a972ced32bb4ad85",
+            "emailUpdates": false,
+            "email": "",
+            "emailPassword": ""
+        },
+        {
+            "userID": "Steven",
+            "password": "20eb2d6033563aa5ccfd1139b30215effa968ab4b817590be3c81f4bd41f9315",
+            "emailUpdates": false,
+            "email": "",
+            "emailPassword": ""
+        }
+    ]
+}

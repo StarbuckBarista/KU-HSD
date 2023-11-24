@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Assignment Center</title>
+
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <script src="js/jquery.js"></script>
+
+        <script src="js/bootstrap.bundle.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/assignments.js"></script>
+        <script src="js/login.js"></script>
+    </head>
+    <body>
+        <h1 class="text-center fw-bolder mt-5">Assignment Center</h1>
+        <br />
+
+        <div id="login" class="modal" data-bs-keyboard="false" data-bs-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Login to Assignment Center</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group m-2 pe-3">
+                            <input id="userID" class="form-control" type="text" placeholder="User ID"></input>
+                        </div>
+                        <div class="input-group m-2 pe-3">
+                            <input id="password" class="form-control" type="password" placeholder="Password"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-start">
+                        <button type="button" class="btn btn-primary" onclick="register();">Register</button>
+                        <button type="button" class="btn btn-success" onclick="login();">Login</button>
+                        <p id="loginError" class="text-danger ms-2"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="assignmentCenter">
+            <div id="listView" class="container w-100 mx-auto mt-3">
+                <div id="actions" class="row justify-content-around">
+                    <div class="row justify-content-center w-25">
+                        <button type="button" id="add-assignment" class="col-sm btn btn-success m-1" onclick="addAssignment();">Add Assignment</button>
+                        <button typee="button" id="filter-status" class="col-sm btn btn-primary m-1" onclick="filterStatus();">Filter Status</button>
+                        <div class="dropdown text-center">
+                            <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
+                            <div class="dropdown-menu">
+                                <button type="button" id="sortAssignmentTitle" class="dropdown-item active" onclick="sortAssignmentTitle();">Assignment Title</button>
+                                <button type="button" id="sortCreationDate" class="dropdown-item" type="button" onclick="sortCreationDate();">Creation Date</button>
+                                <button type="button" id="sortDueDate" class="dropdown-item" type="button" onclick="sortDueDate();">Due Date</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Assignment</th>
+                            <th class="text-center" scope="col">Description</th>
+                            <th class="text-center" scope="col">Due Date</th>
+                            <th class="text-center" scope="col">Status</th>
+                            <th class="text-center" scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listAssignments">
+                    </tbody>
+                </table>
+            </div>
+
+            <br />
+
+            <div id="statistics">
+                <h3 class="text-center fw-bolder">Statistics</h3>
+                <br />
+
+                <p class="text-center"><strong>Assignments Completed in Last 30 Days: </strong><span id="completedAssignments">0</span></p>
+                <p class="text-center"><strong>Assignments Completed On Time in Last 30 Days: </strong><span id="completedOnTimeAssignments">0</span></p>
+
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="generateDailyReport();">Generate Daily Report</button>
+                </div>
+            </div>
+
+            <br />
+            <br />
+
+            <div id="profile" class="mb-5">
+                <h3 class="text-center fw-bolder">Profile</h3>
+                <br />
+
+                <div class="d-flex justify-content-center">
+                    <div class="input-group m-2 pe-3 w-25">
+                        <input id="email" class="form-control" type="text" placeholder="Email"></input>
+                    </div>
+                    <div class="input-group m-2 pe-3 w-25">
+                        <input id="emailPassword" class="form-control" type="password" placeholder="Password"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button id="emailSubmitButton" type="button" class="btn btn-primary" onclick="updateEmailUpdates();">Update Email Updates</button>
+                    </div>
+                </div>
+
+                <br />
+
+                <p class="text-center"><strong>Current Logged in as: </strong><span id="profileUserID" class="bg-secondary bg-gradient bg-opacity-50 rounded p-1">N/A</span></p>
+                <div class="text-center">
+                    <button type="button" class="btn btn-danger" onclick="logout();">Logout</button>
+                </div>
+            </div>
+
+            <div id="addAssignment" class="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Add Assignment</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group m-2 pe-3">
+                                <input id="addAssignmentTitle" class="form-control" type="text" placeholder="Assignment Title"></input>
+                            </div>
+                            <div class="input-group m-2 pe-3">
+                                <textarea id="addAssignmentDescription" class="form-control" type="text" placeholder="Assignment Description"></textarea>
+                            </div>
+                            <div id="addAssignmentDate"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="saveAddAssignment();">Add Assignment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="editAssignment" class="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Edit Assignment</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group m-2 pe-3">
+                                <input id="editAssignmentTitle" class="form-control" type="text" value="Assignment Title"></input>
+                            </div>
+                            <div class="input-group m-2 pe-3">
+                                <textarea id="editAssignmentDescription" class="form-control" type="text" value="Assignment Description"></textarea>
+                            </div>
+                            <div id="editAssignmentDate"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="saveEditAssignment();">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="filterStatus" class="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Filter Status</h3>
+                        </div>
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-sm btn-seconday" onclick="selectAllFilters();">Select All</button>
+                            <button type="button" class="btn btn-sm btn-seconday" onclick="deselectAllFilters();">Deselect All</button>
+                            <div class="form-check m-2 pe-3">
+                                <input class="form-check-input" type="checkbox" value="" id="toDoStatus" checked>
+                                <label class="form-check-label" for="toDoStatus">To Do</label>
+                            </div>
+                            <div class="form-check m-2 pe-3">
+                                <input class="form-check-input" type="checkbox" value="" id="inProgressStatus" checked>
+                                <label class="form-check-label" for="inProgressStatus">In Progress</label>
+                            </div>
+                            <div class="form-check m-2 pe-3">
+                                <input class="form-check-input" type="checkbox" value="" id="completedStatus" checked>
+                                <label class="form-check-label" for="completedStatus">Completed</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="applyFilterStatus();">Apply Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

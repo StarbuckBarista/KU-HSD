@@ -1,0 +1,8 @@
+.datepicker td,th {
+
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+td.active { background-color: rgba(13, 110, 253, 0.5); }
